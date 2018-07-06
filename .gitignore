@@ -1,0 +1,12 @@
+/nbproject/private/
+app/application/config/config.php
+app/application/config/database.php
+gd/
+ot/
+req/
+sess/
+rb/
+BACKUP/
+sess/
+uploads/
+*.sql

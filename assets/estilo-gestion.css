@@ -1,0 +1,120 @@
+/*===============================================*/
+
+div.menu-lat{
+    box-sizing: border-box;
+} 
+
+div.menu-lat ul {
+	padding: 0;
+	margin: 0;
+	display: block;
+	list-style: none;
+}
+div.menu-lat ul li{
+    position: relative;
+}
+
+div.menu-lat ul li a{
+	font-size: 1.1em;
+	padding: 1ex;
+    border-bottom: 1px solid #555;
+    margin-bottom: 1px;
+	display: block;
+	position: relative;
+	text-decoration: none;
+    color: #111;
+}
+div.menu-lat ul li a.selected{
+    background: #346eb2;
+    color: #FFF;
+    text-shadow: 1px 1px 2px #141313;
+}
+
+div.menu-lat ul li a span{
+}
+
+div.menu-lat ul li a:hover{
+	background: #2a3b84;
+	color: #fff;
+}
+
+div.menu-lat ul li.selected:after{
+    content: url(img/indicador.png);
+    position: absolute;
+    right: -3;
+    top: 10;
+    z-index: 100;
+}
+div.divisor div.linea-div-menu{
+    float: left;
+    width: 2px;
+    background: #555;
+    padding-bottom: 1000;
+    margin-bottom: -1000;
+}
+
+/*================================================*/
+
+label span.termo{
+    color: #327aed;
+}
+
+.gestion-pr{
+    margin: 0 auto;
+    padding: 7px;
+    border: 1px solid #898787;
+    border-radius: 5px;
+    overflow: none  ;
+    box-shadow: 0px 0px 10px #333;
+}
+
+.gestion-pr2{
+    margin-left: 1px;
+    float: left;
+    padding: 7px;
+    border: 1px solid #898787;
+    border-radius: 5px;
+    overflow: none  ;
+    box-shadow: 0px 0px 5px #747070;
+}
+.gestion-pr h2:first-child, .gestion-pr h3, .gestion-pr h4{
+    text-align: center;
+}
+.gestion-pr .input-group{
+    width: 100%;
+}
+.gestion-pr .mdle{
+    margin-right: 5%;
+    float: left;
+}
+
+.gestion-pr .termo-thead1{
+    background: #427ff4;
+    color: #EEE;
+    text-shadow: 0px 1px 2px #111;
+}
+.gestion-pr .termo-thead2{
+    background: #42b6f4;
+    color: #EEE;
+    text-shadow: 0px 1px 2px #111;
+}
+table.table tr{
+    font-size: 14px;
+}
+table.table tr td{
+    padding: 4px;
+}
+.identificador{
+    color: #fd065b;
+}
+#uploader-div{
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 4px #aaa inset;
+}
+#uploader, .ajax-upload-dragdrop{
+    display: inline-flex;
+}
+#carga-datos{
+    overflow: hidden;
+}
