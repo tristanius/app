@@ -54,7 +54,7 @@ class Sesion extends CI_Controller {
 				}else{
 					$usuario = $users->row();
 					if($pass === $this->encrypt->decode($usuario->password)){
-						$privilegios = $this->datos_session($usuario->username, $usuario->rol_idrol);
+						$privilegios = $this->datos_session($usuario->idusuario, $usuario->rol_idrol);
 						$data = array(
 							'idusuario'=>$usuario->idusuario,
 							'usuario'=>$this->encrypt->encode($user),
@@ -68,6 +68,7 @@ class Sesion extends CI_Controller {
 							'apps'=>$privilegios['apps'],
 							'gestiones'=>$privilegios['gestiones'],
 							'privilegios'=>$privilegios['privilegios'],
+							'contratos'=>$privilegios['contratos'],
 							'isess' => TRUE
 						);
 						#$this->iniciar_sesion($json);
@@ -89,23 +90,23 @@ class Sesion extends CI_Controller {
 
 	#------------------------------------------------------------------------
 	#cargar datos de session_commit()
-	private function datos_session($user, $idrol){
+	private function datos_session($iduser, $idrol){
 		$this->load->library("session");
 		$privilegios = $this->sesion_db->cargar_privilegios($idrol);
-		$arrayjson = array();
+		$data = array();
 		$arraypriv = array();
-		#privilegio
+		#privilegios
 		foreach ($privilegios->result() as $priv) {
 			$arraypriv[$priv->idprivilegio] = $priv->idprivilegio;
 		}
-		#gestion
-		$arraygest = $this->carga_gestiones($idrol);
+		$data["privilegios" ]= $arraypriv;
+		#gestiones
+		$data["gestiones"] = $this->carga_gestiones($idrol);
 		#apps
-		$arraapps = $this->carga_apps($idrol);		
-		$arrayjson["privilegios" ]= $arraypriv;
-		$arrayjson["gestiones"] = $arraygest;
-		$arrayjson["apps"] = $arraapps;
-		return $arrayjson;
+		$data["apps"] = $this->carga_apps($idrol);
+		#contratos
+		$data['contratos'] =  $this->carga_contratos($iduser);
+		return $data;
 	}
 
 	private function carga_gestiones($idrol){
@@ -124,6 +125,10 @@ class Sesion extends CI_Controller {
 			array_push($arrayapps, $app->nombre_app);
 		}
 		return $arrayapps;
+	}
+	private function carga_contratos($idusuario)
+	{
+		return  $this->sesion_db->carga_contratos($idusuario)->result();
 	}
 
 	#===================================================================================================

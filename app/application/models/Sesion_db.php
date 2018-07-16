@@ -63,6 +63,11 @@ class Sesion_db extends CI_Model {
 		}
 	}
 
+	public function carga_contratos($idusuario)
+	{
+		return $this->db->select('idcontrato')->from('usuario_contrato')->where('idusuario',$idusuario)->get();
+	}
+
 	private function new_inicio($idper){
 		$this->db->update($this->table, 
 				array('ultimo_inicio'=>date('Y-m-d H:i:s')), 

@@ -7,8 +7,8 @@ class Administracion extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set('America/bogota');
 		$idrol = $this->session->userdata('idrol');
-		if($idrol == 1){
-			redirect(site_url(),'refresh')
+		if($idrol != 1){
+			redirect(site_url(),'refresh');
 		}
 	}
 
