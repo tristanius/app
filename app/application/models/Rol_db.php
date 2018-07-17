@@ -28,10 +28,13 @@ class Rol_db extends CI_Model {
 		return $this->db->update('rol', $data, 'idrol = '.$id);
 	}
 
-	public function getAll()
+	public function get($id = NULL)
 	{
 		$this->load->database();
-		return $this->db->from('rol')
+		if (isset($id)) {
+			$this->db->where('idrol', $id);
+		}
+		return $this->db->from('rol')->order_by('rol.grupo', 'ASC')
 					->get();
 	}
 
@@ -45,7 +48,9 @@ class Rol_db extends CI_Model {
 			'rol_idrol'=>$idrol
 		);
 		$this->db->insert('privilegio_has_rol', $data);
+		return $this->db->insert_id();
 	}
+
 	public function delPrivRol($id)
 	{
 		$this->load->database();
@@ -56,6 +61,7 @@ class Rol_db extends CI_Model {
 	{
 		$this->load->database();
 		return $this->db->select('
+					pr.idprivilegio_has_rol,
 					r.idrol,
 					r.nombre_rol,
 					p.idprivilegio,
@@ -67,8 +73,11 @@ class Rol_db extends CI_Model {
 				->join('privilegio AS p','p.idprivilegio = pr.privilegio_idprivilegio')
 				->join('gestion AS g','g.idgestion = p.gestion_idgestion')
 				->where('r.idrol',$idrol)
+				->order_by('g.idgestion','ASC')
 				->get();
 	}
+
+	# validacion de errores
 
 	public function start($value='')
 	{

@@ -139,7 +139,7 @@ app.controller("roles",function($scope, $http, $timeout){
 	$scope.apps = [];
 	$scope.privilegios = [];
 	$scope.roles = [];
-	$scope.rolForm = {};
+	$scope.rolForm = {privilegios:[]};
 	
 	$scope.formRol = function(tag, rol){		
 		if(!rol.privilegios){
@@ -153,7 +153,6 @@ app.controller("roles",function($scope, $http, $timeout){
 		$http.post(lnk, $scope.rolForm).then(
 			function(resp){
 				if(resp.data.status){
-					$scope.rolForm = undefined;
 					$scope.getRoles(lnkConsulta);
 				}else{
 					alert("Algo no ha salido bien.")
@@ -167,7 +166,10 @@ app.controller("roles",function($scope, $http, $timeout){
 		)
 	}
 	$scope.addPrivilegioRol = function(rol, priv){
-		var check = false;
+		var check = false;				
+		if(!rol.privilegios){
+			rol.privilegios = [];
+		}
 		angular.forEach( rol.privilegios, function(v,k){
 			if(v.idprivilegio == priv.idprivilegio)
 				check = true;
@@ -179,22 +181,28 @@ app.controller("roles",function($scope, $http, $timeout){
 		}
 	}
 
-	$scope.deletePrivRol = function(lnk, priv){
-		$http.get( lnk+'/'+priv).then(
-			function(resp){
-				if(resp.data.status){
-					var i = $scope.rolForm.privilegios.indexOf( priv );
-					$scope.rolForm.splice(i,1);
-				}else{
-					alert("Algo ha fallado en el procedimiento.");
-					console.log(resp.data);
-				}
-			},
-			function(resp){
-				alert("Error en conexion al servidor");
-				console.log(resp.data);
+	$scope.deletePrivRol = function(lnk, priv){		
+		if(confirm('¿Esta seguro de eliminar este privilegio al rol seleccionado? La eliminación será inmediata.')){
+			var i = $scope.rolForm.privilegios.indexOf(priv);
+			if(priv.idprivilegio_has_rol){
+				$http.get(lnk+'/'+priv.idprivilegio_has_rol).then(
+					function(resp){
+						if(resp.data.status){
+							$scope.rolForm.privilegios.splice(i,1);
+						}else{
+							alert('Algo ha salido mal, revisa tu sesión y vuelve a intentar.')
+							console.log(resp.data);
+						}
+					},
+					function(resp){
+						alert('Error de consulta de servidor.');
+						console.log(resp.data);
+					}
+				);
+			}else{
+				$scope.rolForm.privilegios.splice(i,1);
 			}
-			);
+		}
 	}
 
 	$scope.getRoles = function(lnk){
@@ -204,8 +212,9 @@ app.controller("roles",function($scope, $http, $timeout){
 					$scope.roles = resp.data.roles;
 				}else{
 					alert("Algo no ha salido bien.")
-					console.log(resp.data);
 				}
+
+					console.log(resp.data);
 			},
 			function(resp){
 				alert("Error al consultar  los roles.")

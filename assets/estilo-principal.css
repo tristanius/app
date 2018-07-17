@@ -215,3 +215,6 @@ footer p{
     color: #FFF;
     background: #78ba2b;
 }
+.modal-lg{
+    max-width: 1200px;
+}

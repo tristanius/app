@@ -22,6 +22,11 @@
           </label>
 
           <label>
+            Grupo: <input type="text" class="form-control text-info" ng-model="rolForm.grupo" placeholder="Ej: Facturación">
+          </label>
+
+
+          <label>
             Tipo de visualización: 
             <select ng-model="rolForm.tipo_visualizacion">
               <option value="sector">sector</option>
@@ -29,10 +34,6 @@
               <option value="contrato">contrato</option>
               <option value="general">general</option>
             </select>
-          </label>
-
-          <label>
-            Grupo: <input type="text" class="form-control text-info" ng-model="rolForm.grupo" placeholder="Ej: Facturación">
           </label>
         </div>
         <br><hr>
@@ -46,35 +47,47 @@
           </select>
           <button type="button" class="btn btn-primary" ng-click="addPrivilegioRol(rolForm, privilegioAdd)">Añadir</button>
 
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>codigo</th>
-                <th>Nombre</th>
-                <th>gestion</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="pr in rolform.privilegios">
-                <td ng-bind="pr.idprivilegio_has_rol"></td>
-                <td ng-bind="pr.codigo_privilegio"></td>
-                <td ng-bind="pr.nombre_privilegio"></td>
-                <td ng-bind="pr.nombre_gestion"></td>
-
-              </tr>            
-            </tbody>
-          </table>          
+          <div style="max-height: 600px; overflow: auto;">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>codigo</th>
+                  <th>gestion</th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <th> <input type="" ng-model="subFilterPriv.idprivilegio"> </th>
+                  <th> <input type="" ng-model="subFilterPriv.nombre_privilegio"> </th>
+                  <th> <input type="" ng-model="subFilterPriv.codigo_privilegio"> </th>
+                  <th> <input type="" ng-model="subFilterPriv.nombre_gestion"> </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="pr in rolForm.privilegios | filter: subFilterPriv">
+                  <td ng-bind="pr.idprivilegio"></td>
+                  <td ng-bind="pr.nombre_privilegio"></td>
+                  <td ng-bind="pr.codigo_privilegio"></td>
+                  <td ng-bind="pr.nombre_gestion"></td>
+                  <td>
+                    <button class="btn btn-danger" ng-click="deletePrivRol('<?= site_url('rol/delPrivilegioRol') ?>', pr)">X</button> 
+                  </td>
+                </tr>            
+              </tbody>
+            </table>  
+          </div>        
 
         </fieldset>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="gestion = undefined">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="rolForm = {privilegios:[]}; subFilterPriv = {}">Close</button>
         <button type="button" 
             class="btn btn-success" 
-            ng-click="save('<?= site_url('rol/save') ?>', gestion, '#formRol', '<?= site_url('rol/getAll') ?>' );" 
-            ng-disabled="!rol.nombre_rol">
+            ng-click="save('<?= site_url('rol/save') ?>', '#formRol', '<?= site_url('rol/getAll') ?>' );" 
+            ng-disabled="!rolForm.nombre_rol">
           Guardar
         </button>
       </div>

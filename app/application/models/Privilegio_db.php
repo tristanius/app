@@ -10,11 +10,16 @@ class Privilegio_db extends CI_Model {
 		
 	}
 
+	# privilegio
 	public function add($priv)
 	{
-		$priv = (array) $priv;
+		$data = array(
+			'nombre_privilegio'=>$priv->nombre_privilegio,
+			'gestion_idgestion'=>$priv->gestion_idgestion,
+			'codigo_privilegio'=>$priv->codigo_privilegio
+		);
 		$this->load->database();
-		$this->db->insert('privilegio', $priv);
+		$this->db->insert('privilegio', $data);
 		return $this->db->insert_id();
 	}
 
@@ -29,6 +34,13 @@ class Privilegio_db extends CI_Model {
 		return $this->db->update('privilegio', $data, 'idprivilegio = '.$id);
 	}
 
+	public function delete($id)
+	{
+		$this->load->database();
+		return $this->db->delete('privilegio', array('idprivilegio'=>$id));
+	}
+
+	# consultas
 	public function getAll()
 	{
 		$this->load->database();
@@ -38,6 +50,8 @@ class Privilegio_db extends CI_Model {
 					->get();
 	}
 
+
+	# manejos de erres
 	public function start($value='')
 	{
 		$this->load->database();
