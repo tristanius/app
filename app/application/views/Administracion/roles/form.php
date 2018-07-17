@@ -72,7 +72,7 @@
                   <td ng-bind="pr.codigo_privilegio"></td>
                   <td ng-bind="pr.nombre_gestion"></td>
                   <td>
-                    <button class="btn btn-danger" ng-click="deletePrivRol('<?= site_url('rol/delPrivilegioRol') ?>', pr)">X</button> 
+                    <button class="btn btn-danger" ng-click="deletePrivRol('<?= site_url('rol/del_priv_rol') ?>', pr)">X</button> 
                   </td>
                 </tr>            
               </tbody>

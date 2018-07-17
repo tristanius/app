@@ -14,15 +14,21 @@ class Rol_db extends CI_Model {
 	public function add($rol)
 	{
 		$data = array(
+			'nombre_rol'=>$rol->nombre_rol,
+			'grupo'=>$rol->grupo,
+			'tipo_visualizacion'=>$rol->tipo_visualizacion
 		);
 		$this->load->database();
 		$this->db->insert('rol', $rol);
 		return $this->db->insert_id();
 	}
 
-	public function update($priv, $id)
+	public function update($rol, $id)
 	{
 		$data = array(
+			'nombre_rol'=>$rol->nombre_rol,
+			'grupo'=>$rol->grupo,
+			'tipo_visualizacion'=>$rol->tipo_visualizacion
 		);
 		$this->load->database();
 		return $this->db->update('rol', $data, 'idrol = '.$id);
@@ -36,6 +42,12 @@ class Rol_db extends CI_Model {
 		}
 		return $this->db->from('rol')->order_by('rol.grupo', 'ASC')
 					->get();
+	}
+
+	public function delete($id)
+	{
+		$this->load->database();
+		return $this->db->delete('rol', array('idrol'=>$id));
 	}
 
 	# Privilegios del rol

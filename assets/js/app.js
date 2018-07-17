@@ -154,17 +154,36 @@ app.controller("roles",function($scope, $http, $timeout){
 			function(resp){
 				if(resp.data.status){
 					$scope.getRoles(lnkConsulta);
+					$(tag).modal('toggle'); 
+					$scope.rolForm = {};
 				}else{
 					alert("Algo no ha salido bien.")
 					console.log(resp.data);
 				}
 			},
 			function(resp){
-				alert("Error al guardar  los gestiones.")
+				alert("Error al guardar el rol.")
 				console.log(resp.data);
 			}
-		)
+		);
 	}
+	$scope.delRol = function(lnk, lnkConsulta){
+		$http.get(lnk).then(
+			function(resp){
+				if(resp.data.status){
+					$scope.getRoles(lnkConsulta);
+				}else{
+					alert(resp.data.msj)
+					console.log(resp.data);
+				}
+			},
+			function(resp){
+				alert("Error: no se puede eliminar el rol, revisa si ha sido asignado a un usuario.")
+				console.log(resp.data);
+			}
+		);
+	}
+
 	$scope.addPrivilegioRol = function(rol, priv){
 		var check = false;				
 		if(!rol.privilegios){

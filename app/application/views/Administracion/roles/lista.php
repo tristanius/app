@@ -34,7 +34,7 @@
 					<td ng-bind="r.tipo_visualizacion"></td>
 					<td>
 						<button type="button" class="btn btn-warning" ng-click="formRol('#formRol', r)"> Modificar</button>
-						<button type="button" class="btn btn-danger"> Eliminar</button>
+						<button type="button" class="btn btn-danger" ng-click="delRol('<?= site_url('rol/delete') ?>/'+r.idrol, '<?= site_url('rol/getAll') ?>')"> Eliminar</button>
 					</td>
 				</tr>
 				

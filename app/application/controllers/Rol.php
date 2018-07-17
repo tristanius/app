@@ -27,7 +27,7 @@ class Rol extends CI_Controller {
 			$this->rol->end();
 		}else{
 			$this->rol->start();
-			$this->rol->update($rol);
+			$this->rol->update($rol, $rol->idrol);
 			$this->savePrivilegios($rol->privilegios, $rol->idrol);
 			$ret->status = $this->rol->status(); # preguntamos el estatus
 			$this->rol->end();
@@ -49,22 +49,24 @@ class Rol extends CI_Controller {
 	public function delete($id)
 	{
 		$ret = new stdClass();
-		if($this->sesion_iniciada() ){
-			$this->rol->start();
-			$this->load->model('rol_db', 'rol');
-			$roles = $this->getRoles($id);
-			if($roles->num_rows() > 0){
-				$rol = $roles->row();
-				foreach ($rol->privilegios as $key => $pr) {
-					$this->rol->delPrivRol($pr->idprivilegio_has_rol);
+			$this->load->model('rol_db', 'rol');		
+			if($this->sesion_iniciada() ){
+				$this->rol->start();
+				$roles = $this->getRoles($id);
+				if(sizeof($roles) > 0){
+					$rol = $roles[0];
+					foreach ($rol->privilegios as $key => $pr) {
+						$this->rol->delPrivRol($pr->idprivilegio_has_rol);
+					}
+					$this->rol->delete($rol->idrol);
 				}
-				$this->rol->delete($rol->idrol);
+				$this->rol->end();
+				$ret->status = TRUE;
+				$ret->msj = 'Borrado con exito';
+			}else{
+				$ret->status = FALSE;
+				$ret->msj = 'No se ha podido eliminar el rol, por un fallo en la consultas con la BD';
 			}
-			$this->rol->end();
-		}else{
-			$ret->status = FALSE;
-			$ret->msj = 'No se ha podido eliminar el rol, verifica que no tenga propiedades enlazadas.';
-		}
 		echo json_encode($ret);
 	}
 
@@ -83,9 +85,9 @@ class Rol extends CI_Controller {
 		}
 	}
 
-	public function getRoles($idRol=NULL)
+	public function getRoles($id=NULL)
 	{
-		$roles = $this->rol->get($idrol)->result();
+		$roles = $this->rol->get($id)->result();
 		foreach ($roles as $key => $rol) {
 			$privs = $this->rol->getPrivilegiosRol($rol->idrol);
 			$rol->privilegios = $privs->result();

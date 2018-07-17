@@ -31,7 +31,7 @@ class Administracion extends CI_Controller {
 				'<a href="'.current_url('').'">Gestiones</a>'
 			);
 
-		$this->crear_vista('administracion/gestion/lista', $direccion_act, NULL, TRUE, 1);
+		$this->crear_vista('administracion/apps/lista', $direccion_act, NULL, TRUE, 0);
 	}
 
 	#=================================================================================
@@ -129,7 +129,7 @@ class Administracion extends CI_Controller {
 	{
 		$menu = array(
 				#array("icono","texto","url"),				
-				array('data-icon="C"','Apps', site_url("administracion/apps")),
+				array('data-icon="C"','Apps (No permitido)', site_url("administracion/apps")),
 				array('data-icon="t"','Gestiones', site_url("administracion/gestiones")),
 				array('data-icon="J"','Privilegios', site_url("administracion/privilegios")),
 				array('data-icon="s"','Roles', site_url("administracion/roles")),
