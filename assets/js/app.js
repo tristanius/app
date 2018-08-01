@@ -261,3 +261,66 @@ app.controller("roles",function($scope, $http, $timeout){
 	}
 
 });
+app.controller("usuarios",function($scope, $http, $timeout){
+
+	$scope.apps = [];
+	$scope.usuarios = [];
+	$scope.roles = [];
+	$scope.formUser = {};
+	
+	$scope.formUser = function(tag, user){
+		$(tag).modal('toggle'); 
+		$scope.formUser = user;
+	}
+
+	$scope.save = function(lnk, tag, lnkConsulta){
+		$http.post(lnk, $scope.rolForm).then(
+			function(resp){
+				if(resp.data.status){
+					$scope.getRoles(lnkConsulta);
+					$(tag).modal('toggle'); 
+					$scope.rolForm = {};
+				}else{
+					alert("Algo no ha salido bien.")
+					console.log(resp.data);
+				}
+			},
+			function(resp){
+				alert("Error al guardar el rol.")
+				console.log(resp.data);
+			}
+		);
+	}
+
+	$scope.peticion = function(lnk, func){
+		$http.get(lnk).then(
+			function(resp){
+				if(resp.data.status == true){
+					func(resp);
+				}else if(resp.data.status == false) {
+					alert(resp.data.msj)
+				}else{
+					alert('Algo ha salido mal.')
+					console.log(resp.data);
+				}
+			},
+			function(resp){
+				alert("Error: no se ha podido completar la petición al servidor.")
+				console.log(resp.data);
+			}
+		);
+	}
+
+	$scope.getUsuarios = function(lnk){
+		$scope.peticion(lnk, function(resp){
+			$scope.usuarios = resp.data.usuarios;
+		});
+	}
+
+	$scope.getRoles = function(lnk){
+		$scope.peticion(lnk, function(resp){
+			$scope.roles = resp.data.roles;
+		});
+	}
+
+});
