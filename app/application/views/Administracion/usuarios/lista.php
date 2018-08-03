@@ -57,7 +57,6 @@
 			</tbody>
 		</table>
 
-
 	</fieldset>
 
 	<?php $this->load->view('administracion/usuarios/form'); ?>

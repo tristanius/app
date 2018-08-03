@@ -41,7 +41,6 @@
 			</tbody>
 		</table>
 
-
 	</fieldset>
 
 	<?php $this->load->view('administracion/roles/form'); ?>

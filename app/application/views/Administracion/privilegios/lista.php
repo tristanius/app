@@ -45,7 +45,6 @@
 			</tbody>
 		</table>
 
-
 	</fieldset>
 
 	<?php $this->load->view('administracion/privilegios/form'); ?>

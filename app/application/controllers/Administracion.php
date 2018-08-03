@@ -123,6 +123,7 @@ class Administracion extends CI_Controller {
 			);
 		$this->load->view("home",array("vista"=>$html));
 	}
+	
 
 	#cargar menu lateral
 	private function cargar_menu_lat()
