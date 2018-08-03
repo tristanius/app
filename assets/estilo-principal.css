@@ -218,3 +218,19 @@ footer p{
 .modal-lg{
     max-width: 1200px;
 }
+
+/* ---------------------------- */
+.font9, .font9 *{
+    font-size: 9px;
+}
+
+.font10, .font10 *{
+    font-size: 10px;
+}
+
+.fon11, .fon11 *{
+    font-size:11px;
+}
+.fon12, .fon12 *{
+    font-size:12px;
+}

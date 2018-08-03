@@ -8,7 +8,7 @@
 
 		<br><br>
 
-		<table  class="table table-bordered table-hover font10" >
+		<table  class="table table-bordered table-hover font9" >
 			<thead class="thead-dark">
 				<tr>
 					<th> ID </th>
@@ -29,9 +29,9 @@
 					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.persona_identificacion"> </th>
 					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.nombres"> </th>
 					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.apellidos"> </th>
-					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.base_idbase"> </th>
-					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.tipo_visualizacion"> </th>
-					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.estado"> </th>
+					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.base_idbase" style="width: 6ex;"> </th>
+					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.tipo_visualizacion" style="width: 6ex;"> </th>
+					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.estado" style="width: 6ex;"> </th>
 					<th> <input type="text" placeholder="Filtro" ng-model="filtroUsers.nombre_rol"> </th>
 					<th></th>
 					<th></th>
