@@ -118,7 +118,7 @@ class Administrator extends CI_Controller {
 	{
 		$this->load->database();
 		$this->db->delete('privilegio_has_rol',array('idprivilegio_has_rol'=>$id));
-		redirect(site_url('administrator/roles'));
+		redirect(site_url('Administrator/roles'));
 	}
 	#=================================================================================
 	# usuarios
@@ -167,7 +167,7 @@ class Administrator extends CI_Controller {
 			$this->load->library("encrypt");
 			$pass = $this->encrypt->encode($row->persona_identificacion);
 			$this->db->update('usuario',array('password'=>$pass, 'estado'=>TRUE), 'idusuario = '.$idusuario);
-			redirect(site_url('administrator/usuarios'));
+			redirect(site_url('Administrator/usuarios'));
 		}else{
 			echo 'usuario no encontrado';
 		}
@@ -185,7 +185,7 @@ class Administrator extends CI_Controller {
 			$this->load->library("encrypt");
 			$pass = "x";
 			$this->db->update('usuario',array('password'=>$pass, 'estado'=>false), 'idusuario = '.$idusuario);
-			redirect(site_url('administrator/usuarios'));
+			redirect(site_url('Administrator/usuarios'));
 		}else{
 			echo 'usuario no encontrado';
 		}
@@ -195,7 +195,7 @@ class Administrator extends CI_Controller {
 	{
 		$this->load->database();
 		$user = $this->db->get_where('usuario', array('idusuario'=>$id) );
-		$this->load->view('administrator/reasignar_usuario_rol', array( 'usuario'=>$user->row() ));
+		$this->load->view('Administrator/reasignar_usuario_rol', array( 'usuario'=>$user->row() ));
 	}
 
 	#=================================================================================
