@@ -26,7 +26,7 @@
 
         <label>
           Gestion: 
-          <select class="form-control  text-info" ng-model="priv.gestion_idgestion" ng-options="g.idgestion  as g.nombre_gestion+' - ('+g.nombre_app+')' for g in gestiones">
+          <select class="form-control  text-info" ng-model="priv.gestion_idgestion" ng-options="g.idgestion  as g.nombre_gestion+' - ('+g.nombre_app+')' group by p.nombre_gestion  for g in gestiones">
             
           </select>
         </label>

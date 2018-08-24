@@ -22,6 +22,31 @@ class Usuario extends CI_Controller {
 		echo json_encode($ret);
 	}
 
+	public function save()
+	{
+		$post = json_decode( file_get_contents('php://input') );
+		$this->load->model('usuario_db', 'user');
+		$ret = new stdClass();
+
+		$this->load->library("encrypt");
+		$post->password = $this->encrypt->encode($post->persona_identificacion);
+
+		if ( isset($post->idusuario) ) {
+			$this->user->mod($post);
+			$ret->status = TRUE;
+		}else{
+			$rows = $this->user->getAll( array('usuario.persona_identificacion'=>$post->persona_identificacion) );
+			if( $rows->num_rows() > 0){
+				$ret->status = FALSE;
+				$ret->msj = 'ya existe no. de identificacion';
+			}else{
+				$post->idusuario = $this->user->add($post);
+				$ret->status = TRUE;
+			}
+		}
+		$ret->user = $post;
+		echo json_encode($ret);
+	}
 
 	public function resetPass($idusuario)
 	{

@@ -8,10 +8,10 @@
 
 		<br><br>
 
-		<table  class="table table-bordered table-hover font9" >
+		<table  class="table table-bordered table-hover font11" >
 			<thead class="thead-dark">
 				<tr>
-					<th> ID </th>
+					<th> No. ID </th>
 					<th> C.C.</th>
 					<th> Nombres</th>
 					<th> Apellidos</th>
@@ -21,8 +21,8 @@
 					<th> Roles</th>
 					<th data-icon="y"> Contratos</th>
 					<th data-icon="y"> Rol</th>
-					<th data-icon="y"></th>
-					<th data-icon="y"></th>
+					<th data-icon="y"> Reset pass</th>
+					<th data-icon="y"> Invalidar User</th>
 				</tr>
 				<tr>
 					<th></th>

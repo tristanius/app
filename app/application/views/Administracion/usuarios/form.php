@@ -18,25 +18,48 @@
 
         <div>
           <label>
-            Identificacion: <input type="text" class="form-control text-info" ng-model="user.identificacion" placeholder="Ej: Crear producto">
+            Identificacion: <input type="text" class="form-control text-info" ng-model="myUser.persona_identificacion" placeholder="Ej: Crear producto">
           </label>
+
+          <label>
+            Nombres: <input type="text" class="form-control text-info" ng-model="myUser.nombres" placeholder="Ej: Crear producto">
+          </label>
+
+          <label>
+            Apellidos: <input type="text" class="form-control text-info" ng-model="myUser.apellidos" placeholder="Ej: Crear producto">
+          </label>  
+
+          <label>
+            Correo: <input type="text" class="form-control text-info" ng-model="myUser.correo" placeholder="Ej: Crear producto">
+          </label>  
+
+          <label>
+            C.O. / Oficina: <input type="text" class="form-control text-info" ng-model="myUser.base_idbase" placeholder="Ej: Crear producto">
+          </label>   
+
+          <label>
+            Estado: 
+            <select ng-model="myUser.estado">
+              <option value="1">activo</option>
+              <option value="0">No activo</option>
+            </select> 
+          </label>          
 
 
           <label>
             Rol: 
-            <select ng-model="user.rol_idrol">
-              <option>Seleccione una opcion</option>
+            <select ng-model="myUser.rol_idrol" ng-options="r.idrol as (r.nombre_rol+' '+r.grupo) group by r.grupo for r in roles">
             </select>
           </label>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="user = {}">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="myUser = {}">Close</button>
         <button type="button" 
             class="btn btn-success" 
             ng-click="save('<?= site_url('usuario/save') ?>', '#formUsuario', '<?= site_url('usuario/getAll') ?>' );" 
-            ng-disabled="!user.identificacion">
+            ng-disabled="!myUser.persona_identificacion">
           Guardar
         </button>
       </div>

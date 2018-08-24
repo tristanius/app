@@ -266,27 +266,30 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	$scope.apps = [];
 	$scope.usuarios = [];
 	$scope.roles = [];
-	$scope.formUser = {};
+	$scope.myUser = {};
 	
 	$scope.formUser = function(tag, user){
 		$(tag).modal('toggle'); 
-		$scope.formUser = user;
+		$scope.myUser = user;
 	}
 
 	$scope.save = function(lnk, tag, lnkConsulta){
-		$http.post(lnk, $scope.rolForm).then(
+		console.log($scope.myUser)
+		$http.post(lnk, $scope.myUser).then(
 			function(resp){
-				if(resp.data.status){
-					$scope.getRoles(lnkConsulta);
+				if(resp.data.status == true){
+					$scope.getUsuarios(lnkConsulta);
 					$(tag).modal('toggle'); 
-					$scope.rolForm = {};
+					$scope.myUser = {};
+				}else if(resp.data.status == false){
+					alert(resp.data.msj);
 				}else{
 					alert("Algo no ha salido bien.")
 					console.log(resp.data);
 				}
 			},
 			function(resp){
-				alert("Error al guardar el rol.")
+				alert("Error al guardar el usuario.")
 				console.log(resp.data);
 			}
 		);
