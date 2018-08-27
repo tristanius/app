@@ -65,8 +65,7 @@ class Welcome extends CI_Controller {
 		$direccion_act = array('app.termo',"formato de recuperación de cuenta" );
 		$this->crear_vista("inicio/response",NULL,$direccion_act);
 	}
-
-
+	
 	#=============================================================================
 	#=============================================================================
 	#privado

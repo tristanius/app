@@ -27,9 +27,7 @@ class Usuario extends CI_Controller {
 		$post = json_decode( file_get_contents('php://input') );
 		$this->load->model('usuario_db', 'user');
 		$ret = new stdClass();
-
-		$this->load->library("encrypt");
-		$post->password = $this->encrypt->encode($post->persona_identificacion);
+		$post->password = password_hash($post->persona_identificacion, PASSWORD_DEFAULT );
 
 		if ( isset($post->idusuario) ) {
 			$this->user->mod($post);
@@ -57,15 +55,14 @@ class Usuario extends CI_Controller {
 		$users = $this->db->get_where('usuario',array('idusuario'=>$idusuario));
 		if ($users->num_rows() > 0) {
 			$row = $users->row();
-			$this->load->library("encrypt");
-			$pass = $this->encrypt->encode($row->persona_identificacion);
+			$pass = password_hash($row->persona_identificacion, PASSWORD_DEFAULT);
 			$this->db->update('usuario',array('password'=>$pass, 'estado'=>TRUE), 'idusuario = '.$idusuario);
 			redirect(site_url('administracion/usuarios'));
 		}else{
 			echo 'usuario no encontrado';
 		}
 	}
-
+	
 	public function invalidarAcceso($idusuario)
 	{
 		if(!$this->sesion_iniciada()){
@@ -75,7 +72,6 @@ class Usuario extends CI_Controller {
 		$users = $this->db->get_where('usuario',array('idusuario'=>$idusuario));
 		if ($users->num_rows() > 0) {
 			$row = $users->row();
-			$this->load->library("encrypt");
 			$pass = "x";
 			$this->db->update('usuario',array('password'=>$pass, 'estado'=>false), 'idusuario = '.$idusuario);
 			redirect(site_url('administracion/usuarios'));
@@ -83,6 +79,27 @@ class Usuario extends CI_Controller {
 			echo 'usuario no encontrado';
 		}
 	}
+
+
+	# =============================================================================
+	public function resetPassAll($userID)
+	{
+		$this->load->database();
+		$rows = $this->db->get('usuario');
+		$this->load->library('encrypt');
+		foreach ($rows->result() as $key => $user ) {
+			try {			
+				#$pass = $this->encrypt->encode($user->persona_identificacion);					
+				$pass = $this->encrypt->decode( $user->password );
+				$pass = password_hash($user->persona_identificacion, PASSWORD_DEFAULT);
+				$this->db->update('usuario', array( 'password'=>$pass ), 'idusuario = '.$user->idusuario);
+			} catch (Exception $e) {
+
+			}
+		}
+	}
+
+	# =============================================================================
 
 	public function service_get_users($value='')
 	{

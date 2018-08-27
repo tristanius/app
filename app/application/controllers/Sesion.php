@@ -47,17 +47,17 @@ class Sesion extends CI_Controller {
 			}
 			$num_rows = $users->num_rows();
 			if($num_rows > 0) {
-				$this->load->library("encrypt");
+				$this->load->library("encryption");
 
 				if($num_rows > 1){
 					echo "Hay campos duplicados, por favor pongase en contacto y reporte este problema.";
 				}else{
 					$usuario = $users->row();
-					if($pass === $this->encrypt->decode($usuario->password)){
+					if( password_verify($pass, $usuario->password) ){
 						$privilegios = $this->datos_session($usuario->idusuario, $usuario->rol_idrol);
 						$data = array(
 							'idusuario'=>$usuario->idusuario,
-							'usuario'=>$this->encrypt->encode($user),
+							'usuario'=>$this->encryption->encrypt($user),
 							'nombre_usuario'=>$usuario->nombres.' '.$usuario->apellidos,
 							'idrol'=>$usuario->idrol,
 							'nombre_rol'=>$usuario->nombre_rol,
@@ -74,6 +74,7 @@ class Sesion extends CI_Controller {
 						#$this->iniciar_sesion($json);
 						#Agregar al log
 						$this->iniciar_sesion($data);
+						echo "Si";
 						addlog($this->input->ip_address(), "inicio de session en webApps SICO", 13, $usuario->idusuario);
 						redirect( site_url('sesion/') );
 					}else{
@@ -174,10 +175,10 @@ class Sesion extends CI_Controller {
 		$this->load->database();
 		$usr = $this->db->get_where("usuario","idusuario = ".$this->session->userdata('idusuario'));
 		if($usr->num_rows() > 0){
-			$this->load->library("encrypt");
 			$us = $usr->row();
-			if($this->encrypt->decode($us->password) == $pass){
-				$this->db->update("usuario", array("password"=>$this->encrypt->encode($pass2)), "idusuario = ".$this->session->userdata('idusuario') );
+			if( password_verify($pass, $us->password) ){ # Verificando pass por hasheo
+				$data = array( "password" => password_hash($pass2, PASSWORD_DEFAULT) ); #Cambio de encryptado de pass por hash
+				$this->db->update("usuario", $data, "idusuario = ".$this->session->userdata('idusuario') );
 				$data = array("success"=>"Su contraseña se ha guardado de manera exitosa");
 			}else{
 				$data = array("success"=>"Su contraseña actual no coincide con la ingresada");
@@ -203,13 +204,14 @@ class Sesion extends CI_Controller {
 	#-------------------------------------
 	public function genpass($pass="termo")
 	{
-		$this->load->library("encrypt");
-		echo $this->encrypt->encode($pass);
+		echo password_has($pass);
 	}
 	public function decrypt($value='')
 	{
-		$this->load->library("encrypt");
-		echo $this->encrypt->decode("WoNmEtJ9GGpff56g48ZUgsibevpUSzjSnOWirHREo0kxYJ647w0EoZAKYsRYcVm6Bdi0Uqv1o8m3RIOSWm8iXQ==");
+		$this->load->library("encryption");
+		$v = $this->encryption->decrypt($value);
+		echo $v;
+		return $v;
 	}
 	#====================================================================================================
 	#config cuenta
