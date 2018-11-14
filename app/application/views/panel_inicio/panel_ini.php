@@ -51,7 +51,7 @@
                     <h6>Administración</h6>
 
                     <p>
-                        <a href="<?= site_url('grud/') ?>" class="btn btn-outline-primary">Gestión Apps</a>
+                        <a href="<?= site_url("administracion/apps") ?>" class="btn btn-outline-primary">Gestión Apps</a>
                     </p>
 
                     <p>
@@ -59,11 +59,11 @@
                     </p>
 
                     <p>
-                        <a href="<?= site_url('grud/') ?>" class="btn btn-outline-danger">Gestión Roles</a>
+                        <a href="<?= site_url("administracion/privilegios") ?>" class="btn btn-outline-danger">Gestión Roles</a>
                     </p>
 
                     <p>
-                        <a href="<?= site_url('grud/') ?>" class="btn btn-outline-warning">Gestión Usuarios</a>
+                        <a href="<?= site_url("administracion/usuarios") ?>" class="btn btn-outline-warning">Gestión Usuarios</a>
                     </p>
 
                 </div>               
