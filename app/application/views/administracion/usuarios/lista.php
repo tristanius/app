@@ -50,7 +50,7 @@
 					<td ng-bind="u.estado"></td>
 					<td ng-bind="u.nombre_rol"></td>
 					<td> <button class="btn btn-warning">Contratos</button> </td>
-					<td> <button class="btn btn-warning">Rol</button> </td>
+					<td> <button class="btn btn-warning" ng-click="formUser('#formUserRol', u)">Rol</button> </td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/resetPass/') ?>/{{u.idusuario}}">R. Pass</a></td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/invalidarAcceso/') ?>/{{u.idusuario}}">Invalidar</a></td>
 				</tr>				
@@ -60,6 +60,7 @@
 	</fieldset>
 
 	<?php $this->load->view('administracion/usuarios/form'); ?>
+	<?php $this->load->view('administracion/usuarios/formRolUser'); ?>
 	
 
 </section>

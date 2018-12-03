@@ -45,6 +45,7 @@
 
             <?php 
                 $idrol = $this->session->userdata('idrol');
+                
                 if ( $idrol == '1' ): 
             ?>
                 <div class="card col-md-4">

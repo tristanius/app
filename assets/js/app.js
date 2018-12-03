@@ -295,8 +295,8 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		);
 	}
 
-	$scope.peticion = function(lnk, func){
-		$http.get(lnk).then(
+	$scope.peticion = function(lnk, data, func){
+		$http.post(lnk, data).then(
 			function(resp){
 				if(resp.data.status == true){
 					func(resp);
@@ -315,15 +315,29 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	}
 
 	$scope.getUsuarios = function(lnk){
-		$scope.peticion(lnk, function(resp){
+		$scope.peticion(lnk, {}, function(resp){
 			$scope.usuarios = resp.data.usuarios;
 		});
 	}
 
-	$scope.getRoles = function(lnk){
-		$scope.peticion(lnk, function(resp){
+	$scope.getRoles = function(lnk,){
+		$scope.peticion(lnk, {}, function(resp){
 			$scope.roles = resp.data.roles;
 		});
 	}
+
+	$scope.asignarRol = function(user, rol, lnk){
+		$scope.peticion(lnk, {idusuario: user.idusuario, idrol: rol.idrol }, function(resp){
+			if(resp.data.success == true){
+				user.idrol = rol.idrol;
+				user.nombre_rol = rol.nombre_rol;
+				// cerrar la ventana
+			}else{
+				alert("no se ha podido realizar el procedimiento correctamente");				
+			}
+		});
+		$(tag).modal("toggle");
+	}
+
 
 });
