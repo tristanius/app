@@ -31,7 +31,7 @@
 
                     <?php 
                     $idrol = $this->session->userdata('idrol');
-                    if ( $idrol = '1' ): 
+                    if ( $idrol == '1' ): 
                     ?>
 
                     <p>
