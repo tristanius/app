@@ -8,7 +8,7 @@
 		        </button>
 		    </div>
 			<div class="modal-body">
-				<h5>Asinacion de rol al usuario: {{ myuser.identificacion }} - {{ myuser.nombres }} {{ myuser.apellidos }}</h5>
+				<h5>Asinacion de rol al usuario: {{ myUser.identificacion }} - {{ myUser.nombres }} {{ myUser.apellidos }}</h5>
 				<fieldset>
 					<label>
 						Rol Asignar: 
@@ -16,7 +16,7 @@
 					<select ng-model="formRol" ng-options="r as r.nombre_rol for r in roles">
 					</select>
 
-					<button ng-click="asignarRol(myuser, formRol, '<?= site_url('usuario/save'); ?>')">Asignaro rol</button>
+					<button ng-click="asignarRol(myUser, formRol, '<?= site_url('usuario/save'); ?>')">Asignaro rol</button>
 				</fieldset>
 			</div>
 			<div class="modal-footer">
