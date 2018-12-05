@@ -16,7 +16,7 @@
 					<select ng-model="formRol" ng-options="r as r.nombre_rol for r in roles">
 					</select>
 
-					<button ng-click="asignarRol(myUser, formRol, '<?= site_url('usuario/save'); ?>')">Asignaro rol</button>
+					<button ng-click="asignarRol(myUser, formRol, '<?= site_url('usuario/save'); ?>', '#formUserRol')">Asignaro rol</button>
 				</fieldset>
 			</div>
 			<div class="modal-footer">
