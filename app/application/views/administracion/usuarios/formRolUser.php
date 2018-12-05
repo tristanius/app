@@ -13,7 +13,7 @@
 					<label>
 						Rol Asignar: 
 					</label>
-					<select ng-model="formRol" ng-options="r as r.nombre_rol for r in roles">
+					<select ng-model="formRol" ng-options="r as (r.nombre_rol+' '+r.grupo) group by r.grupo for r in roles">
 					</select>
 
 					<button ng-click="asignarRol(myUser, formRol, '<?= site_url('usuario/save'); ?>', '#formUserRol')">Asignaro rol</button>

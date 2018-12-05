@@ -19,7 +19,7 @@
 					<th> Visualización </th>
 					<th> Estado</th>
 					<th> Roles</th>
-					<th data-icon="y"> Contratos</th>
+					<th data-icon="y"> <small>Visualización</small> </th>
 					<th data-icon="y"> Rol</th>
 					<th data-icon="y"> Reset pass</th>
 					<th data-icon="y"> Invalidar User</th>
@@ -49,8 +49,8 @@
 					<td ng-bind="u.tipo_visualizacion"></td>
 					<td ng-bind="u.estado"></td>
 					<td ng-bind="u.nombre_rol"></td>
-					<td> <button class="btn btn-warning">Contratos</button> </td>
-					<td> <button class="btn btn-warning" ng-click="formUser('#formUserRol', u)">Rol</button> </td>
+					<td> <button class="btn btn-warning">Acceso C.O.</button> </td>
+					<td> <button class="btn btn-warning" ng-click="formUser('#formUsuario', u)">Modificar</button> </td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/resetPass/') ?>/{{u.idusuario}}">R. Pass</a></td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/invalidarAcceso/') ?>/{{u.idusuario}}">Invalidar</a></td>
 				</tr>				
