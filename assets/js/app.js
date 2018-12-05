@@ -329,9 +329,10 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	$scope.asignarRol = function(user, rol, lnk, tag){
 		if( confirm("¿Confirma el cambio de rol?") ){
 			let data = angular.copy(user);
-			data.idrol = rol.idrol;
+			data.rol_idrol = rol.idrol;
 			data.nombre_rol = rol.nombre_rol;
 			$scope.peticion(lnk, data, function(resp){
+				console.log(resp.data)
 				user.idrol = rol.idrol;
 				user.nombre_rol = rol.nombre_rol;
 				$(tag).modal("toggle");

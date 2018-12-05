@@ -32,6 +32,7 @@ class Usuario extends CI_Controller {
 		if ( isset($post->idusuario) ) {
 			$this->user->mod($post);
 			$ret->status = TRUE;
+			$ret->msj = 'Usuario creado';
 		}else{
 			$rows = $this->user->getAll( array('usuario.persona_identificacion'=>$post->persona_identificacion) );
 			if( $rows->num_rows() > 0){
@@ -40,6 +41,7 @@ class Usuario extends CI_Controller {
 			}else{
 				$post->idusuario = $this->user->add($post);
 				$ret->status = TRUE;
+				$ret->msj = 'Usuario modificado';
 			}
 		}
 		$ret->user = $post;
