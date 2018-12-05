@@ -331,13 +331,8 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		data.idrol = rol.idrol;
 		data.nombre_rol = rol.nombre_rol;
 		$scope.peticion(lnk, data, function(resp){
-			if(resp.data.success == true){
-				user.idrol = rol.idrol;
-				user.nombre_rol = rol.nombre_rol;
-				// cerrar la ventana
-			}else{
-				alert("no se ha podido realizar el procedimiento correctamente");				
-			}
+			user.idrol = rol.idrol;
+			user.nombre_rol = rol.nombre_rol;
 		});
 		$(tag).modal("toggle");
 	}
