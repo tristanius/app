@@ -327,7 +327,10 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	}
 
 	$scope.asignarRol = function(user, rol, lnk){
-		$scope.peticion(lnk, {idusuario: user.idusuario, idrol: rol.idrol }, function(resp){
+		let data = angular.copy(user);
+		data.idrol = rol.idrol;
+		data.nombre_rol = rol.nombre_rol;
+		$scope.peticion(lnk, data, function(resp){
 			if(resp.data.success == true){
 				user.idrol = rol.idrol;
 				user.nombre_rol = rol.nombre_rol;
