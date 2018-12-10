@@ -261,6 +261,7 @@ app.controller("roles",function($scope, $http, $timeout){
 	}
 
 });
+
 app.controller("usuarios",function($scope, $http, $timeout){
 
 	$scope.apps = [];
@@ -326,19 +327,23 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		});
 	}
 
-	$scope.asignarRol = function(user, rol, lnk, tag){
-		if( confirm("¿Confirma el cambio de rol?") ){
-			let data = angular.copy(user);
-			data.rol_idrol = rol.idrol;
-			data.nombre_rol = rol.nombre_rol;
-			$scope.peticion(lnk, data, function(resp){
-				console.log(resp.data)
-				user.idrol = rol.idrol;
-				user.nombre_rol = rol.nombre_rol;
-				$(tag).modal("toggle");
-			});
-		}
+	$scope.initContratosUser = function(lnk, tag, user){
+		$scope.peticion(lnk, {}, function(resp){
+			$scope.contratos = resp.data.contratos;
+		});
+		$scope.formUser(tag, user);
 	}
 
+	$scope.getContratoByUser = function(lnk, user){
+		$scope.peticion(lnk, {idusuario: iduser}, function(resp){
+			user.contratos =  resp.data.contratos;
+		});
+	}
+
+	$scope.relacionarAcceso = function(user, rol, lnk, tag){
+		if( confirm("¿Confirma el acceso de este contrato al usuario?") ){
+			
+		}
+	}
 
 });

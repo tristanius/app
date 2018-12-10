@@ -19,8 +19,8 @@
 					<th> Visualización </th>
 					<th> Estado</th>
 					<th> Roles</th>
-					<th data-icon="y"> <small>Visualización</small> </th>
-					<th data-icon="y"> Rol</th>
+					<th data-icon="y"> <small>Asignar <br> accesos</small> </th>
+					<th data-icon="y"> Modificar</th>
 					<th data-icon="y"> Reset pass</th>
 					<th data-icon="y"> Invalidar User</th>
 				</tr>
@@ -47,9 +47,9 @@
 					<td ng-bind="u.apellidos"></td>
 					<td ng-bind="u.base_idbase"></td>
 					<td ng-bind="u.tipo_visualizacion"></td>
-					<td ng-bind="u.estado"></td>
+					<td ng-bind="u.estado?'Activo':'Inactivo"></td>
 					<td ng-bind="u.nombre_rol"></td>
-					<td> <button class="btn btn-warning">Acceso C.O.</button> </td>
+					<td> <button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', #formAccesoUser', u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>')">Acceso C.O.</button> </td>
 					<td> <button class="btn btn-warning" ng-click="formUser('#formUsuario', u)">Modificar</button> </td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/resetPass/') ?>/{{u.idusuario}}">R. Pass</a></td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/invalidarAcceso/') ?>/{{u.idusuario}}">Invalidar</a></td>
@@ -60,7 +60,7 @@
 	</fieldset>
 
 	<?php $this->load->view('administracion/usuarios/form'); ?>
-	<?php $this->load->view('administracion/usuarios/formRolUser'); ?>
+	<?php $this->load->view('administracion/usuarios/formAccesoUser'); ?>
 	
 
 </section>

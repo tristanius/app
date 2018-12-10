@@ -52,6 +52,12 @@ class Usuario_db extends CI_Model {
 		return $this->db->update('usuario', $data, 'idusuario = '.$obj->idusuario);
 	}
 
+	public function getContratos($iduser)
+	{
+		$this->load->database();
+		return $this->db->select('*')->from('usuario_contrato')->where('idusuario'=>$iduser)->get();
+	}
+
 }
 
 /* End of file Usuario_db.php */

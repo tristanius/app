@@ -82,6 +82,14 @@ class Usuario extends CI_Controller {
 		}
 	}
 
+	public function get_contratos()
+	{
+		$post = json_decode('');
+		if($this->sesion_iniciada()){
+			$this->load->model(array('usuario_db'=>'user'));
+			$contratos = $this->user->get_contratos()->result();
+		}
+	}
 
 	# =============================================================================
 	public function resetPassAll($userID)
