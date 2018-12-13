@@ -344,7 +344,7 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	$scope.existUsuarioContrato = function(usuario, contrato){
 		let exist = false;
 		angular.forEach(usuario.contratos, function(v,k){
-			if(v.idcontrato = contrato.idcontrato){
+			if(v.idcontrato == contrato.idcontrato){
 				exist = true;
 			}
 		});

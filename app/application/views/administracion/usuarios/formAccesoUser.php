@@ -43,7 +43,7 @@
 					<div class="col-md-5">
 						<legend>Selecciona un contrato para dar acceso</legend>
 						<div>
-							<table>
+							<table class="table table-bordered table-hover font11">
 								<thead>
 									<tr>
 										<td> <input type="text" ng-model="filtroContratos.idcontrato"> </td>
@@ -64,7 +64,12 @@
 										<td ng-bind="c.no_contrato"></td>
 										<td> <p ng-bind="c.objeto"></p> </td>
 										<td>
-											<button ng-click="relacionarContrato('<?= site_url('usuario/relacionar_contrato') ?>', myUser, c)" ng-disabled="existUsuarioContrato(myUser, c)">Add. acceso</button>
+											<button 
+												ng-click="relacionarContrato('<?= site_url('usuario/relacionar_contrato') ?>', myUser, c)" 
+												ng-disabled="existUsuarioContrato(myUser, c)" 
+												class="btn btn-warning">
+												Add. acceso
+											</button>
 										</td>
 									</tr>
 								</tbody>
