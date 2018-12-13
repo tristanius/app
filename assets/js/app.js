@@ -331,8 +331,8 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	$scope.initContratosUser = function(lnk, tag, user){
 		$scope.peticion(lnk, {}, function(resp){
 			$scope.contratos = resp.data.contratos;
-		});
-		$scope.formUser(tag, user);
+			$scope.formUser(tag, user);
+		});		
 	}
 
 	$scope.getContratoByUser = function(lnk, iduser){
