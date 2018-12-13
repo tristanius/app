@@ -55,17 +55,15 @@ class Usuario_db extends CI_Model {
 	public function getContratos($iduser)
 	{
 		$this->load->database();
-		return $this->db->select('*')->from('usuario_contrato')->where('idusuario'=>$iduser)->get();
+		return $this->db->select('*')->from('usuario_contrato')->where('idusuario', $iduser)->get();
 	}
 
 	public function relacionarContrato($idusuario, $idcontrato)
 	{
 		$this->load->database();
-		$data = $this->db->
-		return 
+		$this->db->insert('usuario_contrato', array('idusuario'=>$idusuario, 'idcontrato'=>$idcontrato));
+		return $this->db->insert_id();
 	}
-
 }
-
 /* End of file Usuario_db.php */
 /* Location: ./application/models/Usuario_db.php */
