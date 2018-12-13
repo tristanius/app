@@ -75,7 +75,7 @@
 					<div class="col-md-5">
 
 						<div class="alert alert-success" role="alert" ng-repeat="uc in myUser.contratos">
-							<span ng-bind="uc.no_contrato"></span> <button class="btn btn-danger btn-sm">X</button>
+							ID: <span ng-bind="uc.idcontrato"></span> <button class="btn btn-danger btn-sm">X</button>
 						</div>
 						
 					</div>

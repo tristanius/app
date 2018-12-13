@@ -50,7 +50,7 @@
 					<td ng-bind="u.estado?'Activo':'Inactivo'"></td>
 					<td ng-bind="u.nombre_rol"></td>
 					<td> 
-						<button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', #formAccesoUser, u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>', u.idusuario)">Acceso C.O.</button> 
+						<button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', '#formAccesoUser', u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>', u.idusuario)">Acceso C.O.</button> 
 					</td>
 					<td> 
 						<button class="btn btn-warning" ng-click="formUser('#formUsuario', u)">Modificar</button> 
