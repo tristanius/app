@@ -91,7 +91,7 @@ class Usuario extends CI_Controller {
 			$this->load->model(array('usuario_db'=>'user'));
 			$contratos = $this->user->getContratos($post->idusuario);
 			$ret->contratos = $contratos->result();
-			$rt->status = TRUE;
+			$ret->status = TRUE;
 		}else{
 			$ret->status = FALSE;
 			$ret->msj = 'No de ha realizdo la consulta de contratos de usuario, valida tu sesion de nuevo.';
