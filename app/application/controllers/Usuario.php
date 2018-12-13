@@ -89,7 +89,7 @@ class Usuario extends CI_Controller {
 		$ret = new stdClass();
 		if($this->sesion_iniciada()){
 			$this->load->model(array('usuario_db'=>'user'));
-			$contratos = $this->user->get_contratos($post->idusuario);
+			$contratos = $this->user->getContratos($post->idusuario);
 			$ret->contratos = $contratos->result();
 			$rt->status = TRUE;
 		}else{
@@ -105,7 +105,7 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuario_db','user');
 		$post = json_decode( file_get_contents('php://input') );
 		$id = $this->user->relacionarContrato($post->idusuario, $post->idcontrato);
-		$ret->contratos =  $this->user->get_contratos($post->idusuario);
+		$ret->contratos =  $this->user->getContratos($post->idusuario);
 		$ret->status = TRUE;
 		echo json_encode($ret);
 	}

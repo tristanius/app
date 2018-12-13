@@ -26,7 +26,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td ng-bind="myUser.identificacion"></td>
+								<td ng-bind="myUser.persona_identificacion"></td>
 								<td ng-bind="myUser.nombres"></td>
 								<td ng-bind="myUser.apellidos"></td>
 								<td ng-bind="myUser.tipo_visualizacion"></td>
