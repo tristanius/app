@@ -49,7 +49,7 @@
 					<td ng-bind="u.tipo_visualizacion"></td>
 					<td ng-bind="u.estado?'Activo':'Inactivo"></td>
 					<td ng-bind="u.nombre_rol"></td>
-					<td> <button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', #formAccesoUser', u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>')">Acceso C.O.</button> </td>
+					<td> <button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', #formAccesoUser', u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>', u.idusuario)">Acceso C.O.</button> </td>
 					<td> <button class="btn btn-warning" ng-click="formUser('#formUsuario', u)">Modificar</button> </td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/resetPass/') ?>/{{u.idusuario}}">R. Pass</a></td>
 					<td><a class="btn btn-default" style="padding:3px" href="<?= site_url('usuario/invalidarAcceso/') ?>/{{u.idusuario}}">Invalidar</a></td>

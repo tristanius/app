@@ -81,14 +81,33 @@ class Usuario extends CI_Controller {
 			echo 'usuario no encontrado';
 		}
 	}
-
+	
+	// AJAX POST
 	public function get_contratos()
 	{
-		$post = json_decode('');
+		$post = json_decode( file_get_contents('php://input') );
+		$ret = new stdClass();
 		if($this->sesion_iniciada()){
 			$this->load->model(array('usuario_db'=>'user'));
-			$contratos = $this->user->get_contratos()->result();
+			$contratos = $this->user->get_contratos($post->idusuario);
+			$ret->contratos = $contratos->result();
+			$rt->status = TRUE;
+		}else{
+			$ret->status = FALSE;
+			$ret->msj = 'No de ha realizdo la consulta de contratos de usuario, valida tu sesion de nuevo.';
 		}
+		echo json_encode($ret);
+	}
+	// AJAX POST
+	public function relacionar_contrato()
+	{
+		$ret = new stdClass();
+		$this->load->model('usuario_db','user');
+		$post = json_decode( file_get_contents('php://input') );
+		$id = $this->user->relacionarContrato($post->idusuario, $post->idcontrato);
+		$ret->contratos =  $this->user->get_contratos($post->idusuario);
+		$ret->status = TRUE;
+		echo json_encode($ret);
 	}
 
 	# =============================================================================

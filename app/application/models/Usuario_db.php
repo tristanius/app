@@ -58,6 +58,13 @@ class Usuario_db extends CI_Model {
 		return $this->db->select('*')->from('usuario_contrato')->where('idusuario'=>$iduser)->get();
 	}
 
+	public function relacionarContrato($idusuario, $idcontrato)
+	{
+		$this->load->database();
+		$data = $this->db->
+		return 
+	}
+
 }
 
 /* End of file Usuario_db.php */

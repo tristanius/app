@@ -238,6 +238,7 @@ app.controller("roles",function($scope, $http, $timeout){
 			function(resp){
 				alert("Error al consultar  los roles.")
 				console.log(resp.data);
+
 			}
 		);
 	}
@@ -268,7 +269,7 @@ app.controller("usuarios",function($scope, $http, $timeout){
 	$scope.usuarios = [];
 	$scope.roles = [];
 	$scope.myUser = {};
-	
+
 	$scope.formUser = function(tag, user){
 		$(tag).modal('toggle'); 
 		$scope.myUser = user;
@@ -334,15 +335,27 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		$scope.formUser(tag, user);
 	}
 
-	$scope.getContratoByUser = function(lnk, user){
+	$scope.getContratoByUser = function(lnk, iduser){
 		$scope.peticion(lnk, {idusuario: iduser}, function(resp){
 			user.contratos =  resp.data.contratos;
 		});
 	}
 
-	$scope.relacionarAcceso = function(user, rol, lnk, tag){
+	$scope.existUsuarioContrato = function(usuario, contrato){
+		let exist = false;
+		angular.forEach(usuario.contratos, function(v,k){
+			if(v.idcontrato = contrato.idcontrato){
+				exist = true;
+			}
+		});
+		return exist;
+	}
+	
+	$scope.relacionarAcceso = function(lnk, user, contrato){
 		if( confirm("¿Confirma el acceso de este contrato al usuario?") ){
-			
+			$scope.peticion(lnk, {idusuario: user.idusuario, idcontrato: contrato.idcontrato}, function(resp){
+				$scope.myUser.contratos.push(contrato);
+			});
 		}
 	}
 

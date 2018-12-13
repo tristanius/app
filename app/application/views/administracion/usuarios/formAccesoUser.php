@@ -46,11 +46,13 @@
 							<table>
 								<thead>
 									<tr>
+										<td> <input type="text" ng-model="filtroContratos.idcontrato"> </td>
 										<td> <input type="text" ng-model="filtroContratos.no_contrato"> </td>
 										<td> <input type="text" ng-model="filtroContratos.objeto"> </td>
 										<td> </td>
 									</tr>
 									<tr>
+										<th>ID</th>
 										<th>No. contrato</th>
 										<th>Objeto de contrato</th>
 										<th>Dar acceso <br>a contrato </th>
@@ -58,10 +60,11 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="c in contratos">
+										<td ng-bind="c.idcontrato"></td>
 										<td ng-bind="c.no_contrato"></td>
 										<td> <p ng-bind="c.objeto"></p> </td>
 										<td>
-											<button ng-click="relacionarContrato('<?= site_url('usuario/relacionar_acceso_contrato') ?>', c.idcontrato, myUser.idusuario)">Add. acceso</button>
+											<button ng-click="relacionarContrato('<?= site_url('usuario/relacionar_contrato') ?>', myUser, c)" ng-disabled="existUsuarioContrato(myUser, c)">Add. acceso</button>
 										</td>
 									</tr>
 								</tbody>
