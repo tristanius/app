@@ -351,7 +351,7 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		return exist;
 	}
 	
-	$scope.relacionarAcceso = function(lnk, user, contrato){
+	$scope.relacionarContrato = function(lnk, user, contrato){
 		if( confirm("¿Confirma el acceso de este contrato al usuario?") ){
 			$scope.peticion(lnk, {idusuario: user.idusuario, idcontrato: contrato.idcontrato}, function(resp){
 				$scope.myUser.contratos = resp.data.contratos;

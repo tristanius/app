@@ -40,7 +40,7 @@
 
 				<div class="row" ng-if="myUser.tipo_visualizacion == 'contrato'">
 
-					<div class="col-md-5">
+					<div class="col-md-12">
 						<legend>Selecciona un contrato para dar acceso</legend>
 						<div>
 							<table class="table table-bordered table-hover font11">
@@ -59,7 +59,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="c in contratos">
+									<tr ng-repeat="c in contratos | filter: filtroContratos">
 										<td ng-bind="c.idcontrato"></td>
 										<td ng-bind="c.no_contrato"></td>
 										<td> <p ng-bind="c.objeto"></p> </td>
@@ -76,15 +76,7 @@
 							</table>
 						</div>
 					</div>
-
-					<div class="col-md-5">
-
-						<div class="alert alert-success" role="alert" ng-repeat="uc in myUser.contratos">
-							ID: <span ng-bind="uc.idcontrato"></span> <button class="btn btn-danger btn-sm">X</button>
-						</div>
-						
-					</div>
-					
+										
 				</div>
 
 			</div>
