@@ -66,9 +66,15 @@
 										<td>
 											<button 
 												ng-click="relacionarContrato('<?= site_url('usuario/relacionar_contrato') ?>', myUser, c)" 
-												ng-disabled="existUsuarioContrato(myUser, c)" 
+												ng-if="existUsuarioContrato(myUser, c)" 
 												class="btn btn-warning">
 												Add. acceso
+											</button>
+											<button
+												ng-click="relacionarContrato('<?= site_url('usuario/relacionar_contrato') ?>', myUser, c)" 
+												ng-if="!existUsuarioContrato(myUser, c)" 
+												class="btn btn-danger">
+												X
 											</button>
 										</td>
 									</tr>
