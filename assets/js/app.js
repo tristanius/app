@@ -359,4 +359,12 @@ app.controller("usuarios",function($scope, $http, $timeout){
 		}
 	}
 
+	$scope.eliminarContrato = function(lnk, user, contrato){
+		if( confirm("¿Confirma eliminar acceso a este contrato?") ){
+			$scope.peticion(lnk, {idusuario : user.idusuario, idcontrato: contrato.idcontrato}, function(resp){
+				$scope.contratos = resp.data.contratos;
+			});
+		}
+	}
+
 });

@@ -47,7 +47,7 @@
 					<td ng-bind="u.apellidos"></td>
 					<td ng-bind="u.base_idbase"></td>
 					<td ng-bind="u.tipo_visualizacion"></td>
-					<td ng-bind="u.estado?'Activo':'Inactivo'"></td>
+					<td ng-bind="u.estado==1?'Activo':'Inactivo'"></td>
 					<td ng-bind="u.nombre_rol"></td>
 					<td> 
 						<button class="btn btn-warning" ng-click="initContratosUser('<?= base_url('ot/index.php/contrato/get_contratos') ?>', '#formAccesoUser', u); getContratoByUser('<?= site_url('usuario/get_contratos') ?>', u.idusuario)">Acceso C.O.</button> 
